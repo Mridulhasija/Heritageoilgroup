@@ -1,0 +1,4 @@
+<?php $richContent = (string)($richContent ?? ''); ?>
+<article class="mx-auto max-w-5xl border border-secondary-100 bg-white px-6 py-8 text-secondary-700 shadow-sm sm:px-10 sm:py-12 lg:px-14 [&_h1]:mb-5 [&_h1]:text-4xl [&_h1]:font-medium [&_h1]:text-secondary-900 [&_h2]:mb-4 [&_h2]:mt-8 [&_h2]:text-2xl [&_h2]:font-semibold [&_h2]:text-secondary-900 [&_h3]:mb-3 [&_h3]:mt-6 [&_h3]:text-xl [&_h3]:font-semibold [&_p]:mb-5 [&_p]:text-base [&_p]:leading-8 [&_ul]:mb-5 [&_ul]:list-disc [&_ul]:pl-6 [&_ol]:mb-5 [&_ol]:list-decimal [&_ol]:pl-6 [&_li]:mb-2 [&_a]:font-medium [&_a]:text-primary-700 [&_a]:underline [&_blockquote]:border-l-4 [&_blockquote]:border-primary-500 [&_blockquote]:pl-5 [&_blockquote]:italic [&_img]:my-6 [&_img]:h-auto [&_img]:max-w-full [&_table]:my-6 [&_table]:w-full [&_table]:border-collapse [&_th]:border [&_th]:border-secondary-200 [&_th]:bg-primary-50 [&_th]:p-3 [&_td]:border [&_td]:border-secondary-200 [&_td]:p-3">
+    <?= $richContent ?>
+</article>
