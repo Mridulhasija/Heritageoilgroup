@@ -197,47 +197,7 @@ $pageHeroTitle = trim((string) ($respage->title ?? 'Contact Us')) ?: 'Contact Us
 $pageHeroImage = SITE_URL . '/assets/images/contact-img';
 include __DIR__ . '/components/page-hero.php';
 ?>
-    <style>
-        main > section[aria-labelledby="oil-contact-title"] {
-            background-color: #f5f0e4;
-            color: #29251e;
-        }
-
-        main > section[aria-labelledby="oil-contact-title"] .text-white {
-            color: #29251e;
-        }
-
-        main > section[aria-labelledby="oil-contact-title"] .text-white\/70 {
-            color: #5f584b;
-        }
-
-        main > section[aria-labelledby="oil-contact-title"] .text-white\/60 {
-            color: #6e6659;
-        }
-
-        main > section[aria-labelledby="oil-contact-title"] .border-white\/15 {
-            border-color: rgb(41 37 30 / 18%);
-        }
-    </style>
-    <?php $contactHeading = 'We’d love to hear from you'; include __DIR__ . '/components/contact-form.php'; ?>
-
 <main>
-    <section class="bg-primary-50">
-        <div class="mx-auto grid w-full max-w-screen-xl gap-12 px-6 py-20 sm:px-10 md:grid-cols-[.8fr_1.2fr] md:gap-20 md:py-28 lg:px-16">
-            <div>
-                <span class="text-xs font-semibold uppercase tracking-[.18em] text-primary-700">Goodness at every step</span>
-                <h2 class="mt-4 text-4xl font-normal leading-tight tracking-tight text-secondary-900 md:text-6xl">Why choose us</h2>
-                <p class="mt-5 max-w-sm leading-8 text-secondary-600">Quality is a practice, built into every decision from origin to delivery.</p>
-            </div>
-            <div class="border-t border-secondary-900/15">
-                <article class="grid grid-cols-[3rem_1fr] gap-5 border-b border-secondary-900/15 py-6"><span class="grid h-11 w-11 place-items-center rounded-full border border-primary-600/50 bg-white/60 text-xl text-primary-700" aria-hidden="true">✳</span><div><h3 class="font-semibold text-secondary-900">Quality in every batch</h3><p class="mt-2 leading-7 text-secondary-600">Careful checks at each stage help keep the colour, flavour, and performance consistent from delivery to delivery.</p></div></article>
-                <article class="grid grid-cols-[3rem_1fr] gap-5 border-b border-secondary-900/15 py-6"><span class="grid h-11 w-11 place-items-center rounded-full border border-primary-600/50 bg-white/60 text-xl text-primary-700" aria-hidden="true">⌁</span><div><h3 class="font-semibold text-secondary-900">Global sourcing insight</h3><p class="mt-2 leading-7 text-secondary-600">We follow harvests, origins, and market needs across regions to make informed choices about the oils we supply.</p></div></article>
-                <article class="grid grid-cols-[3rem_1fr] gap-5 border-b border-secondary-900/15 py-6"><span class="grid h-11 w-11 place-items-center rounded-full border border-primary-600/50 bg-white/60 text-xl text-primary-700" aria-hidden="true">◎</span><div><h3 class="font-semibold text-secondary-900">Trusted producer relationships</h3><p class="mt-2 leading-7 text-secondary-600">Close partnerships support responsible purchasing, clear communication, and dependable product availability.</p></div></article>
-                <article class="grid grid-cols-[3rem_1fr] gap-5 border-b border-secondary-900/15 py-6"><span class="grid h-11 w-11 place-items-center rounded-full border border-primary-600/50 bg-white/60 text-xl text-primary-700" aria-hidden="true">◌</span><div><h3 class="font-semibold text-secondary-900">Supply you can plan around</h3><p class="mt-2 leading-7 text-secondary-600">Responsive service and reliable delivery help kitchens, retailers, and food makers keep work moving.</p></div></article>
-            </div>
-        </div>
-    </section>
-
     <section class="mx-auto grid w-full max-w-screen-xl gap-10 px-6 py-20 sm:px-10 md:grid-cols-[.8fr_1.2fr] md:gap-20 md:py-28 lg:px-16" aria-labelledby="order-support-title">
         <div>
             <span class="text-xs font-semibold uppercase tracking-[.18em] text-primary-700">Here when you need us</span>
@@ -262,6 +222,24 @@ include __DIR__ . '/components/page-hero.php';
                 <h3 class="font-semibold text-secondary-900">Discuss a replacement or exchange</h3>
                 <p class="mt-2 leading-7 text-secondary-600">If something isn’t right, contact us with the product and order details. We’ll review the situation and explain what can be arranged.</p>
             </article>
+        </div>
+    </section>
+
+       <?php $contactHeading = 'We’d love to hear from you'; include __DIR__ . '/components/contact-form.php'; ?>     
+       
+           <section>
+        <div class="mx-auto grid w-full max-w-screen-xl gap-12 px-6 py-20 sm:px-10 md:grid-cols-[.8fr_1.2fr] md:gap-20 md:py-28 lg:px-16">
+            <div>
+                <span class="text-xs font-semibold uppercase tracking-[.18em] text-primary-700">Goodness at every step</span>
+                <h2 class="mt-4 text-4xl font-normal leading-tight tracking-tight text-secondary-900 md:text-6xl">Why choose us</h2>
+                <p class="mt-5 max-w-sm leading-8 text-secondary-600">Quality is a practice, built into every decision from origin to delivery.</p>
+            </div>
+            <div class="border-t border-secondary-900/15">
+                <article class="grid grid-cols-[3rem_1fr] gap-5 border-b border-secondary-900/15 py-6"><span class="grid h-11 w-11 place-items-center rounded-full border border-primary-600/50 bg-white/60 text-xl text-primary-700" aria-hidden="true">✳</span><div><h3 class="font-semibold text-secondary-900">Quality in every batch</h3><p class="mt-2 leading-7 text-secondary-600">Careful checks at each stage help keep the colour, flavour, and performance consistent from delivery to delivery.</p></div></article>
+                <article class="grid grid-cols-[3rem_1fr] gap-5 border-b border-secondary-900/15 py-6"><span class="grid h-11 w-11 place-items-center rounded-full border border-primary-600/50 bg-white/60 text-xl text-primary-700" aria-hidden="true">⌁</span><div><h3 class="font-semibold text-secondary-900">Global sourcing insight</h3><p class="mt-2 leading-7 text-secondary-600">We follow harvests, origins, and market needs across regions to make informed choices about the oils we supply.</p></div></article>
+                <article class="grid grid-cols-[3rem_1fr] gap-5 border-b border-secondary-900/15 py-6"><span class="grid h-11 w-11 place-items-center rounded-full border border-primary-600/50 bg-white/60 text-xl text-primary-700" aria-hidden="true">◎</span><div><h3 class="font-semibold text-secondary-900">Trusted producer relationships</h3><p class="mt-2 leading-7 text-secondary-600">Close partnerships support responsible purchasing, clear communication, and dependable product availability.</p></div></article>
+                <article class="grid grid-cols-[3rem_1fr] gap-5 border-b border-secondary-900/15 py-6"><span class="grid h-11 w-11 place-items-center rounded-full border border-primary-600/50 bg-white/60 text-xl text-primary-700" aria-hidden="true">◌</span><div><h3 class="font-semibold text-secondary-900">Supply you can plan around</h3><p class="mt-2 leading-7 text-secondary-600">Responsive service and reliable delivery help kitchens, retailers, and food makers keep work moving.</p></div></article>
+            </div>
         </div>
     </section>
 
