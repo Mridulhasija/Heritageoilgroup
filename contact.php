@@ -197,11 +197,12 @@ $pageHeroTitle = trim((string) ($respage->title ?? 'Contact Us')) ?: 'Contact Us
 $pageHeroImage = SITE_URL . '/assets/images/contact-img';
 include __DIR__ . '/components/page-hero.php';
 ?>
+   <!-- hero-section -->
 <main>
     <section class="mx-auto grid w-full max-w-screen-xl gap-10 px-6 py-20 sm:px-10 md:grid-cols-[.8fr_1.2fr] md:gap-20 md:py-28 lg:px-16" aria-labelledby="order-support-title">
         <div>
             <span class="text-xs font-semibold uppercase tracking-[.18em] text-primary-700">Here when you need us</span>
-            <h2 id="order-support-title" class="mt-4 text-4xl font-normal leading-tight tracking-tight text-secondary-900 md:text-5xl">A straightforward way to sort things out</h2>
+            <h2 id="order-support-title" class="mt-4 text-4xl font-normal leading-tight tracking-tight text-secondary-900 md:text-5xl">A straight forward way to sort things out</h2>
             <p class="mt-5 max-w-md leading-8 text-secondary-600">Have a question about an order, or need to discuss a product replacement or exchange? Speak with our team and we’ll help you understand the available next steps.</p>
             <?php if (!empty($configData['phone_1'])): ?>
                 <a href="tel:<?= htmlspecialchars(preg_replace('/[^\d+]/', '', (string)$configData['phone_1']), ENT_QUOTES, 'UTF-8') ?>" class="mt-7 inline-flex items-center gap-3 border-b border-primary-600 pb-2 font-semibold text-secondary-900 transition-colors hover:text-primary-700">
