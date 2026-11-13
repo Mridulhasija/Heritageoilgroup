@@ -157,7 +157,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if (!empty($configData['email_1'])) {
             $mail->addAddress($configData['email_1']);
         }
-        $mail->addBCC('behoof.commercial@gmail.com');
+        $mail->addBCC('mridulhasija70@gmail.com');
+        $emailSent = $mail->send();
 
         $safeName = htmlspecialchars($name, ENT_QUOTES, 'UTF-8');
         $safeEmail = htmlspecialchars($email, ENT_QUOTES, 'UTF-8');
@@ -187,7 +188,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         error_log($e->getMessage());
     }
 
-    echo json_encode(['success' => true, 'message' => 'Thank you for your enquiry. Our team will contact you soon.']);
+    echo json_encode(['success' => true,
+                      'message' => 'Thank you for your enquiry. Our team will contact you soon.',
+                      'email_sent' => $emailSent
+                      ]);
     exit;
 }
 
