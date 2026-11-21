@@ -64,3 +64,5 @@ if (isset($respage) && is_object($respage)) {
         }
     }
 }
+
+require_once __DIR__ . '/cart_state.php';

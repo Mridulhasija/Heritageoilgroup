@@ -196,7 +196,7 @@ document.addEventListener("DOMContentLoaded", function () {
             throw new Error("Unexpected server response. Please try again.");
           }
 
-          showResponse(data.success, data.message);
+          showResponse(data.success, data.message, data.email_sent);
           if (data.success) {
             form.reset();
             reset();

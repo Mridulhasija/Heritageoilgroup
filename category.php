@@ -252,14 +252,15 @@ include('components/header.php');
 
 <?php
 $pageHeroTitle = $page_heading;
-$pageHeroImage = SITE_URL . '/assets/images/contact-img';
+$pageHeroImage = SITE_URL . '/assets/images/categories/' . $categoryImageSlug . '.jpg';
+$pageHeroRevealClass = 'scroll-reveal';
 include __DIR__ . '/components/page-hero.php';
 ?>
 
 
 <?php if (count($sub_cats) > 0): // category page blocks ?>
 
-    <section class="bg-secondary-50 px-6 py-12">
+    <section class="scroll-reveal bg-secondary-50 px-6 py-12">
         <h2 class="mb-12 text-center text-4xl font-semibold text-secondary-900 lg:text-5xl">
             Related Products
         </h2>
@@ -275,31 +276,35 @@ include __DIR__ . '/components/page-hero.php';
                     ? SITE_URL . '/assets/images/categories/' . rawurlencode($subCategorySlug) . '.jpg'
                     : (!empty($sub_cat['image']) ? media_folder . $sub_cat['image'] : '');
             ?>
-                <div class="text-center">
-                    <a href="<?= $url ?>">
-                        <div class="overflow-hidden border border-secondary-100 bg-white shadow-md transition hover:-translate-y-1 hover:shadow-xl">
+                <?php
+                $subPrice = (is_numeric($sub_cat['discounted_price'] ?? null) && (float) $sub_cat['discounted_price'] > 0)
+                    ? $sub_cat['discounted_price']
+                    : ($sub_cat['price'] ?? '');
+                $subUnit = isset($unitLabels[$sub_cat['unit'] ?? '']) ? $sub_cat['unit'] : 'C62';
+                $subDescription = trim(strip_tags((string)($sub_cat['short_description'] ?? '')));
+                ?>
+                <article class="scroll-reveal overflow-hidden rounded-2xl border border-secondary-200 bg-white text-center shadow-md transition hover:-translate-y-1 hover:shadow-xl">
+                    <a href="<?= htmlspecialchars($url, ENT_QUOTES, 'UTF-8') ?>" class="block">
+                        <div class="overflow-hidden rounded-t-2xl bg-white">
                             <img
                                 src="<?= htmlspecialchars($subCategoryImage, ENT_QUOTES, 'UTF-8') ?>"
                                 alt="<?= htmlspecialchars((string)($sub_cat['title'] ?? ''), ENT_QUOTES, 'UTF-8') ?>"
                                 class="w-full h-auto object-cover aspect-square" />
-                            <div class="bg-primary-700">
-                                <h3 class="py-3 text-lg font-medium text-white"><?= $sub_cat['title'] ?></h3>
-                            </div>
-                            <?php
-                            $subPrice = (is_numeric($sub_cat['discounted_price'] ?? null) && (float) $sub_cat['discounted_price'] > 0)
-                                ? $sub_cat['discounted_price']
-                                : ($sub_cat['price'] ?? '');
-                            $subUnit = isset($unitLabels[$sub_cat['unit'] ?? '']) ? $sub_cat['unit'] : 'C62';
-                            if (is_numeric($subPrice) && (float) $subPrice > 0):
-                            ?>
-                                <p class="bg-white px-3 py-3 text-sm font-semibold text-secondary-800">
-                                    <?= htmlspecialchars($getdata->formatPrice((float) $subPrice)) ?>
-                                    <span class="font-normal text-secondary-700">/ <?= htmlspecialchars($unitLabels[$subUnit]) ?></span>
-                                </p>
-                            <?php endif; ?>
                         </div>
                     </a>
-                </div>
+                    <div class="p-5">
+                        <h3 class="text-xl font-semibold text-secondary-900"><?= htmlspecialchars((string)($sub_cat['title'] ?? ''), ENT_QUOTES, 'UTF-8') ?></h3>
+                        <?php if (is_numeric($subPrice) && (float)$subPrice > 0): ?>
+                            <p class="mt-2 text-lg font-semibold text-primary-700"><?= htmlspecialchars($getdata->formatPrice((float)$subPrice), ENT_QUOTES, 'UTF-8') ?> <span class="text-sm font-normal text-secondary-600">/ <?= htmlspecialchars($unitLabels[$subUnit], ENT_QUOTES, 'UTF-8') ?></span></p>
+                        <?php endif; ?>
+                        <p class="mt-3 text-sm font-semibold uppercase tracking-wide text-secondary-700">100% plant oil</p>
+                        <p class="mt-2 min-h-12 text-sm leading-6 text-secondary-600"><?= htmlspecialchars($subDescription ?: 'Quality plant oil, carefully sourced and prepared for your requirements.', ENT_QUOTES, 'UTF-8') ?></p>
+                        <div class="mt-5 grid gap-3 sm:grid-cols-2">
+                            <a href="<?= htmlspecialchars($url, ENT_QUOTES, 'UTF-8') ?>" class="inline-flex min-h-11 items-center justify-center rounded-md bg-primary-700 px-4 py-2 text-sm font-semibold text-white transition hover:bg-secondary-900">Buy now</a>
+                            <button type="button" class="oil-enquire inline-flex min-h-11 items-center justify-center rounded-md border border-primary-700 px-4 py-2 text-sm font-semibold text-primary-800 transition hover:bg-primary-50" data-oil-name="<?= htmlspecialchars((string)($sub_cat['title'] ?? ''), ENT_QUOTES, 'UTF-8') ?>" data-oil-image="<?= htmlspecialchars($subCategoryImage, ENT_QUOTES, 'UTF-8') ?>">Enquire now</button>
+                        </div>
+                    </div>
+                </article>
             <?php endforeach; ?>
 
         </div>
@@ -308,7 +313,7 @@ include __DIR__ . '/components/page-hero.php';
 <?php endif; ?>
 
 <!-- content -->
-<section class="mx-auto grid w-full max-w-screen-xl gap-8 px-4 py-10 md:grid-cols-[minmax(0,2fr)_minmax(260px,1fr)] md:px-8">
+<section class="scroll-reveal mx-auto grid w-full max-w-screen-xl gap-8 px-4 py-10 md:grid-cols-[minmax(0,2fr)_minmax(260px,1fr)] md:px-8">
 
     <div class="min-w-0">
 
@@ -317,7 +322,7 @@ include __DIR__ . '/components/page-hero.php';
         </div>
 
         <?php if ($faqs): ?>
-            <section class="mt-8" aria-labelledby="faq-heading">
+            <section class="scroll-reveal mt-8" aria-labelledby="faq-heading">
                 <h2 id="faq-heading" class="text-2xl font-semibold">Frequently Asked Questions</h2>
                 <?php foreach ($faqs as $faq): ?>
                     <details class="mt-4 border border-secondary-200 bg-white p-4">
@@ -352,7 +357,33 @@ include __DIR__ . '/components/page-hero.php';
 
 </section>
 
+<div id="oil-enquiry-modal" class="fixed inset-0 z-[100] hidden items-center justify-center overflow-y-auto bg-secondary-950/65 px-4 py-8 backdrop-blur-sm" role="dialog" aria-modal="true" aria-labelledby="oil-modal-title">
+    <div class="relative my-auto w-full max-w-3xl rounded-2xl bg-[#f5f0e4] p-4 shadow-2xl sm:p-7">
+        <button type="button" class="oil-modal-close absolute right-3 top-3 z-10 grid h-10 w-10 place-items-center rounded-full bg-white text-2xl text-secondary-800 shadow" aria-label="Close enquiry form">&times;</button>
+        <div class="mb-5 flex items-center gap-4 pr-12">
+            <img id="oil-modal-image" src="" alt="" class="h-16 w-16 rounded-xl border border-primary-200 bg-white object-cover shadow-sm">
+            <div><p class="text-xs font-semibold uppercase tracking-[.16em] text-primary-700">Product enquiry</p><h2 id="oil-modal-title" class="mt-1 text-2xl font-semibold text-secondary-900"></h2></div>
+        </div>
+        <form action="<?= SITE_URL ?>/contact.php" method="POST" class="contact-form space-y-4" data-form-id="<?= htmlspecialchars(uniqid('oil_form_', true), ENT_QUOTES, 'UTF-8') ?>">
+            <div class="form-response-message hidden rounded border px-4 py-3 text-sm font-medium" role="alert" aria-live="polite"></div>
+            <input type="hidden" name="product_title" id="oil-modal-product-title" value="">
+            <div class="grid gap-4 sm:grid-cols-2">
+                <label class="flex flex-col text-xs font-semibold text-secondary-700">Your name<input type="text" name="name" autocomplete="name" placeholder="Full name" required maxlength="100" class="mt-2 rounded-md border border-secondary-200 bg-white px-3 py-3 text-sm font-normal"></label>
+                <label class="flex flex-col text-xs font-semibold text-secondary-700">Email address<input type="email" name="email" autocomplete="email" placeholder="you@example.com" required maxlength="150" class="mt-2 rounded-md border border-secondary-200 bg-white px-3 py-3 text-sm font-normal"></label>
+                <label class="flex flex-col text-xs font-semibold text-secondary-700">Phone number<div class="phone-field mt-2"><input type="tel" name="phone" class="phone w-full rounded-md border border-secondary-200 bg-white px-3 py-3 text-sm" autocomplete="tel" placeholder="Your phone number" required maxlength="20"><span class="error-msg text-xs text-red-700"></span><span class="valid-msg text-xs text-green-700"></span></div></label>
+                <label class="flex flex-col text-xs font-semibold text-secondary-700">Country or region<input type="text" name="location" autocomplete="country-name" placeholder="Where are you contacting us from?" required maxlength="120" class="mt-2 rounded-md border border-secondary-200 bg-white px-3 py-3 text-sm font-normal"></label>
+                <label class="flex flex-col text-xs font-semibold text-secondary-700 sm:col-span-2">Message<textarea name="message" rows="3" placeholder="How can we help?" required maxlength="1000" class="mt-2 resize-y rounded-md border border-secondary-200 bg-white px-3 py-3 text-sm font-normal"></textarea></label>
+            </div>
+            <div><label for="oil-captcha" class="block text-xs font-semibold text-secondary-700">Verification code</label><div class="mt-2 flex flex-wrap items-center gap-2"><input id="oil-captcha" type="text" name="captcha_code" class="captcha-input min-w-0 flex-1 rounded-md border border-secondary-200 bg-white px-3 py-3 text-sm" placeholder="Enter the code" required><img src="<?= SITE_URL ?>/captcha.php?generate=1&amp;form_id=<?= rawurlencode(uniqid('oil_form_', true)) ?>" alt="CAPTCHA" class="captcha-image h-12 rounded-md border border-secondary-200" data-form-id="<?= htmlspecialchars(uniqid('oil_form_', true), ENT_QUOTES, 'UTF-8') ?>"><button class="captcha-refresh-btn grid h-11 w-11 place-items-center rounded-md border border-secondary-200 bg-white text-xl" type="button" title="Refresh verification code" aria-label="Refresh verification code">↻</button></div><input type="hidden" name="captcha_form_id" class="captcha-form-id" value=""></div>
+            <button type="submit" data-loading-text="Sending…" class="inline-flex min-h-12 w-full items-center justify-center gap-3 rounded-md bg-primary-700 px-5 py-3 text-sm font-semibold text-white hover:bg-secondary-900">Send enquiry <span aria-hidden="true">↗</span></button>
+        </form>
+    </div>
+</div>
+
+<script src="assets/js/category.js"></script>
+
 <?php $contactHeading = 'Ask about this product'; $contactContext = 'I would like to know more about ' . $category_name . '.'; $contactInnerClass = 'md:px-2'; $contactSectionSpacing = 'py-10'; include __DIR__ . '/components/contact-form.php'; ?>
+<script src="<?= SITE_URL ?>/assets/js/scroll-reveal.js?v=<?= (int) filemtime(__DIR__ . '/assets/js/scroll-reveal.js') ?>" defer></script>
 
 <?php
 include('components/footer.php');

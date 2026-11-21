@@ -23,7 +23,7 @@ $schema = ['@context' => 'https://schema.org', '@graph' => [
 include __DIR__ . '/components/header.php';
 ?>
 <main class="font-sans text-secondary-900">
-    <section class="relative isolate min-h-[620px] overflow-hidden bg-gradient-to-br from-primary-100 via-primary-300 to-primary-600 md:min-h-[680px]" aria-label="Heritage Drop Oil introduction">
+    <section class="scroll-reveal relative isolate min-h-[620px] overflow-hidden bg-gradient-to-br from-primary-100 via-primary-300 to-primary-600 md:min-h-[680px]" aria-label="Heritage Drop Oil introduction">
         <div class="absolute inset-0" aria-hidden="true">
             <?php
             $slideBackdrops = [
@@ -56,7 +56,7 @@ include __DIR__ . '/components/header.php';
         <span class="absolute bottom-7 right-8 z-10 text-xs tracking-widest text-white/80" data-slide-count>01 / 05</span>
     </section>
 
-    <section class="mx-auto grid w-full max-w-screen-xl items-center gap-12 px-6 py-20 sm:px-10 md:grid-cols-2 md:gap-20 md:py-28 lg:px-16">
+    <section class="scroll-reveal mx-auto grid w-full max-w-screen-xl items-center gap-12 px-6 py-20 sm:px-10 md:grid-cols-2 md:gap-20 md:py-28 lg:px-16">
         <div>
             <span class="text-xs font-semibold uppercase tracking-[.18em] text-primary-700">A little about us</span>
             <h2 class="mt-4 text-4xl font-normal leading-tight tracking-tight text-secondary-900 md:text-6xl">Get to know us</h2>
@@ -74,7 +74,7 @@ include __DIR__ . '/components/header.php';
         </div>
     </section>
 
-    <section class="bg-primary-50">
+    <section class="scroll-reveal bg-primary-50">
         <div class="mx-auto grid w-full max-w-screen-xl gap-12 px-6 py-20 sm:px-10 md:grid-cols-[.8fr_1.2fr] md:gap-20 md:py-28 lg:px-16">
             <div><span class="text-xs font-semibold uppercase tracking-[.18em] text-primary-700">Goodness at every step</span><h2 class="mt-4 text-4xl font-normal leading-tight tracking-tight text-secondary-900 md:text-6xl">Why choose us</h2><p class="mt-5 max-w-sm leading-8 text-secondary-600">Quality is a practice, built into every decision from origin to delivery.</p></div>
             <div class="border-t border-secondary-900/15">
@@ -87,7 +87,7 @@ include __DIR__ . '/components/header.php';
     </section>
 
       <!-- testimonial section -->
-    <section class="mx-auto grid w-full max-w-screen-xl gap-8 px-6 py-20 sm:px-10 md:grid-cols-[.85fr_1.15fr] md:gap-20 md:py-28 lg:px-16" aria-labelledby="testimonial-title">
+    <section class="scroll-reveal mx-auto grid w-full max-w-screen-xl gap-8 px-6 py-20 sm:px-10 md:grid-cols-[.85fr_1.15fr] md:gap-20 md:py-28 lg:px-16" aria-labelledby="testimonial-title">
         <div><span class="text-xs font-semibold uppercase tracking-[.18em] text-primary-700">From our community</span><h2 id="testimonial-title" class="mt-4 text-4xl font-normal leading-tight tracking-tight text-secondary-900 md:text-6xl">What our clients say</h2></div>
         <div data-testimonial-carousel>
             <div class="relative min-h-[390px] overflow-hidden sm:min-h-[330px] lg:min-h-[300px]" aria-live="polite">
@@ -116,4 +116,5 @@ include __DIR__ . '/components/header.php';
     <?php $contactHeading = 'Let’s start a conversation'; $contactInnerClass = 'px-2 sm:px-4 lg:px-10'; $contactSectionSpacing = 'py-20 md:py-28'; include __DIR__ . '/components/contact-form.php'; ?>
 </main>
 <script src="<?= SITE_URL ?>/assets/js/home-hero.js?v=<?= (int) filemtime(__DIR__ . '/assets/js/home-hero.js') ?>"></script>
+<script src="<?= SITE_URL ?>/assets/js/scroll-reveal.js?v=<?= (int) filemtime(__DIR__ . '/assets/js/scroll-reveal.js') ?>" defer></script>
 <?php include __DIR__ . '/components/footer.php'; ?>

@@ -11,7 +11,7 @@ $contactGridClass = $contactCentered
     : 'grid gap-10 md:grid-cols-[.75fr_1.25fr] md:gap-16';
 $contactSectionClass = 'bg-[#f5f0e4] px-4 text-[#29251e] sm:px-6 ' . $contactSectionSpacing;
 ?>
-<section class="<?= $contactSectionClass ?>" aria-labelledby="oil-contact-title">
+<section class="scroll-reveal <?= $contactSectionClass ?>" aria-labelledby="oil-contact-title">
   <div class="mx-auto w-full max-w-screen-xl <?= htmlspecialchars($contactInnerClass, ENT_QUOTES, 'UTF-8') ?> <?= $contactGridClass ?>">
     <div class="flex flex-col items-start pt-2"><span class="text-xs font-semibold uppercase tracking-[.18em] text-primary-700">We’re here to help</span><h2 id="oil-contact-title" class="mt-4 max-w-lg text-4xl font-normal leading-tight tracking-tight text-secondary-900 md:text-6xl"><?= htmlspecialchars($contactHeading, ENT_QUOTES, 'UTF-8') ?></h2><p class="mt-5 max-w-sm leading-8 text-secondary-600"><?= htmlspecialchars($contactIntro, ENT_QUOTES, 'UTF-8') ?></p>
         <?php if (!empty($configData['phone_1'])): ?><a href="tel:<?= htmlspecialchars(preg_replace('/[^\d+]/', '', (string)$configData['phone_1']), ENT_QUOTES, 'UTF-8') ?>" class="mt-8 flex items-center gap-4 border-t border-secondary-900/15 pt-5 text-secondary-900 no-underline transition-colors hover:text-primary-700"><span class="grid h-11 w-11 shrink-0 place-items-center rounded-full border border-primary-600/60 text-lg text-primary-700" aria-hidden="true">☎</span><span class="flex flex-col gap-1"><span class="text-xs text-secondary-600">Call our team</span><span class="text-base font-medium"><?= htmlspecialchars((string)$configData['phone_1'], ENT_QUOTES, 'UTF-8') ?></span></span></a><?php endif; ?>

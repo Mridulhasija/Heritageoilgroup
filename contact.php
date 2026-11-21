@@ -190,7 +190,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     echo json_encode(['success' => true,
                       'message' => 'Thank you for your enquiry. Our team will contact you soon.',
-                      'email_sent' => $emailSent
+                     
                       ]);
     exit;
 }
@@ -198,7 +198,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 $pageCanonical = SITE_URL . '/contact';
 include('components/header.php');
 $pageHeroTitle = trim((string) ($respage->title ?? 'Contact Us')) ?: 'Contact Us';
-$pageHeroImage = SITE_URL . '/assets/images/contact-img';
+$pageHeroImage = SITE_URL . '/assets/images/oil-img.jpg';
 include __DIR__ . '/components/page-hero.php';
 ?>
    <!-- hero-section -->
