@@ -25,6 +25,7 @@
     <script src="<?= SITE_URL ?>/assets/js/tailwind.js"></script>
     <?php include __DIR__ . '/tailwind-config.php'; ?>
     <script src="<?= SITE_URL ?>/assets/js/navbar.js"></script>
+    <script defer src="<?= SITE_URL ?>/assets/js/shop.js?v=<?= (int) filemtime(__DIR__ . '/../assets/js/shop.js') ?>"></script>
 
     <link rel="stylesheet" href="<?= SITE_URL ?>/assets/intlTelInput/style.css?v=<?= (int) filemtime(__DIR__ . '/../assets/intlTelInput/style.css') ?>" />
     <script defer src="<?= SITE_URL ?>/assets/intlTelInput/main.js"></script>
@@ -42,8 +43,17 @@
             </a>
 
             <div class="order-2 flex items-center justify-end gap-2 md:w-1/4">
+                <a href="<?= SITE_URL ?>/cart" aria-label="View cart" class="relative inline-flex h-11 min-h-11 w-11 shrink-0 items-center justify-center border border-primary-700 bg-white text-primary-800 transition hover:bg-primary-50 focus:outline-none focus:ring-4 focus:ring-primary-200 sm:w-auto sm:gap-2 sm:px-4" title="View cart">
+                    <svg class="h-5 w-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M3 3h2l2.2 11.2a2 2 0 0 0 2 1.6h8.9a2 2 0 0 0 2-1.6L22 8H6" />
+                        <circle cx="10" cy="20" r="1" />
+                        <circle cx="18" cy="20" r="1" />
+                    </svg>
+                    <span class="hidden text-sm font-semibold sm:inline">Cart</span>
+                    <span class="cart-count absolute -right-1.5 -top-1.5 inline-flex h-5 min-w-5 items-center justify-center rounded-full bg-primary-700 px-1 text-[11px] font-bold leading-none text-white" aria-live="polite" aria-label="Items in cart">0</span>
+                </a>
                 <a href="<?= SITE_URL ?>/contact"
-                    class="hidden bg-primary-700 px-6 py-3.5 text-base font-semibold text-white transition hover:bg-secondary-900 focus:outline-none focus:ring-4 focus:ring-primary-200 sm:inline-flex">
+                    class="hidden h-11 min-h-11 items-center justify-center bg-primary-700 px-4 text-sm font-semibold text-white transition hover:bg-secondary-900 focus:outline-none focus:ring-4 focus:ring-primary-200 sm:inline-flex lg:px-6 lg:text-base">
                     Contact us
                 </a>
                 <button data-collapse-toggle="navbar-sticky" type="button"

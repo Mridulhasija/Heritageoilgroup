@@ -21,6 +21,7 @@ $routes = [
     'contact'          => 'contact.php',
     'cart'             => 'cart.php',
     'checkout'         => 'checkout.php',
+    'shop'             => 'shop.php',
     'payment'          => 'payment.php',
     'service-areas'    => 'service-areas.php',
     'shipping-policy'  => 'page.php',

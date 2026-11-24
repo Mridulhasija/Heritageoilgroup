@@ -1,5 +1,7 @@
 (() => {
     const modal = document.getElementById('oil-enquiry-modal');
+    if (!modal) return;
+
     const image = document.getElementById('oil-modal-image');
     const title = document.getElementById('oil-modal-title');
     const productTitle = document.getElementById('oil-modal-product-title');
@@ -8,7 +10,7 @@
     const formId = form.dataset.formId;
     form.querySelector('.captcha-form-id').value = formId;
     form.querySelector('.captcha-image').dataset.formId = formId;
-    form.querySelector('.captcha-image').src = '<?= SITE_URL ?>/captcha.php?generate=1&form_id=' + encodeURIComponent(formId);
+    form.querySelector('.captcha-image').src = modal.dataset.captchaUrl + '?generate=1&form_id=' + encodeURIComponent(formId);
     document.querySelectorAll('.oil-enquire').forEach(button => button.addEventListener('click', () => {
         title.textContent = button.dataset.oilName;
         productTitle.value = button.dataset.oilName;

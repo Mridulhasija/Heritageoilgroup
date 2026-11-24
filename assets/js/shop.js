@@ -103,8 +103,14 @@ function viewCart() {
 }
 
 function showAlert(msg, cartLink = false) {
-  const alertContainer = document.getElementById("floating-alert-container");
-  if (!alertContainer) return;
+  let alertContainer = document.getElementById("floating-alert-container");
+  if (!alertContainer) {
+    alertContainer = document.createElement("div");
+    alertContainer.id = "floating-alert-container";
+    alertContainer.dataset.cartUrl = document.querySelector(".cart-count")?.closest("a")?.href || "/cart";
+    alertContainer.className = "fixed right-4 top-24 z-[120] grid max-w-sm gap-3";
+    document.body.appendChild(alertContainer);
+  }
 
   const alertMessage = document.createElement("div");
   alertMessage.className =

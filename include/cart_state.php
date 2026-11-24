@@ -13,24 +13,21 @@ function heritage_catalog_item(string $productID): ?array
         return null;
     }
 
-    $product = $getdata->FetchProductData($productID);
-    if (!empty($product)) {
-        return $product;
-    }
-
     $conn = db();
     $stmt = $conn->prepare('SELECT id, title, image, url, price, discounted_price, status FROM tbl_product_category WHERE id = ? LIMIT 1');
-    if (!$stmt) {
-        return null;
+    if ($stmt) {
+        $stmt->bind_param('s', $productID);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $row = $result ? $result->fetch_assoc() : null;
+        $stmt->close();
+        if ($row) {
+            return $row;
+        }
     }
 
-    $stmt->bind_param('s', $productID);
-    $stmt->execute();
-    $result = $stmt->get_result();
-    $row = $result ? $result->fetch_assoc() : null;
-    $stmt->close();
-
-    return $row ?: null;
+    $product = $getdata->FetchProductData($productID);
+    return $product ?: null;
 }
 
 function heritage_catalog_image(array $productData): string

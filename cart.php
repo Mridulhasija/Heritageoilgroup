@@ -2,55 +2,11 @@
 include('include/header_config.php');
 
 // Initialize cart data
-$total = 0;
-$cartItems = [];
-$removedItems = []; // Track removed out-of-stock items
-
-$cartData = isset($_COOKIE['cart']) ? json_decode($_COOKIE['cart'], true) ?? [] : [];
-
-foreach ($cartData as $item) {
-    $productID = $getdata->sanitizeInput($item['productID'] ?? null);
-    if (!$productID) continue;
-
-    $quantity = filter_var(
-        ($item['quantity'] ?? 1),
-        FILTER_VALIDATE_INT,
-        ['options' => ['min_range' => 1]]
-    ) ?: 1;
-
-    $productData = $getdata->FetchProductData($productID);
-    if (empty($productData)) continue;
-
-    // Check if product is out of stock
-    if (isset($productData['status']) && $productData['status'] == 0) {
-        $removedItems[] = $productData['title'];
-
-        // Remove from cart based on user type
-        if ($isLoggedIn) {
-            $stmt = $conn->prepare("DELETE FROM tbl_cart_items WHERE id = ?");
-            $stmt->execute([$item['id']]);
-        } else {
-            // Don't add to updated cart data (effectively removing it)
-        }
-        continue; // Skip this item
-    }
-
-    $price = !empty($productData['discounted_price']) && $productData['discounted_price'] > 0
-        ? $productData['discounted_price']
-        : $productData['price'];
-
-    $itemSubtotal = $price * $quantity;
-    $total += $itemSubtotal;
-
-    $cartItems[] = [
-        'id' => $productID,
-        'name' => $productData['title'],
-        'image' => !empty($productData['image']) ? media_folder . $productData['image'] : '',
-        'price' => $price,
-        'quantity' => $quantity,
-        'subtotal' => $itemSubtotal
-    ];
-}
+$cartSnapshot = heritage_cart_snapshot();
+$cartItems = $cartSnapshot['items'];
+$removedItems = $cartSnapshot['removed'];
+$total = $cartSnapshot['total'];
+heritage_sync_cart_cookie($cartSnapshot['kept']);
 $pageCanonical = SITE_URL . '/cart';
 
 include('components/header.php');
@@ -85,7 +41,7 @@ include __DIR__ . '/components/page-hero.php';
                             </ul>
                         </div>
                         <div class="mt-3">
-                            <a href="<?= SITE_URL ?>/our-products" class="text-sm font-medium text-primary-800 hover:text-primary-600 underline">
+                            <a href="<?= SITE_URL ?>/shop.php" class="text-sm font-medium text-primary-800 hover:text-primary-600 underline">
                                 Browse other products →
                             </a>
                         </div>
@@ -118,7 +74,7 @@ include __DIR__ . '/components/page-hero.php';
                                 </svg>
                                 <h3 class="mt-4 text-lg font-medium text-gray-900">Your cart is empty</h3>
                                 <p class="mt-2 text-gray-500">Looks like you haven't added any products to your cart yet.</p>
-                                <a href="<?= SITE_URL ?>/our-products" class="mt-6 inline-block bg-primary-500 hover:bg-primary-600 text-white font-semibold py-3 px-6 rounded-full transition-colors">
+                                <a href="<?= SITE_URL ?>/shop.php" class="mt-6 inline-block bg-primary-500 hover:bg-primary-600 text-white font-semibold py-3 px-6 rounded-full transition-colors">
                                     Start Shopping
                                 </a>
                             </div>
@@ -169,7 +125,7 @@ include __DIR__ . '/components/page-hero.php';
                     <!-- Cart Actions -->
                     <div class="p-4 sm:px-6 bg-secondary-50 border-t border-secondary-200 flex flex-wrap gap-4 justify-between items-center">
                         <!-- Continue Shopping -->
-                        <a href="<?= SITE_URL ?>/our-products" class="flex items-center text-secondary-700 hover:text-primary-600 transition-colors font-medium">
+                        <a href="<?= SITE_URL ?>/shop.php" class="flex items-center text-secondary-700 hover:text-primary-600 transition-colors font-medium">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
                             </svg>
@@ -212,7 +168,7 @@ include __DIR__ . '/components/page-hero.php';
                         </div>
 
                         <!-- Checkout Button -->
-                        <a href="<?= SITE_URL ?>/checkout" id="checkoutBtn"
+                        <a href="<?= SITE_URL ?>/checkout.php" id="checkoutBtn"
                             class="<?= ($total <= 0) ? "hidden" : "" ?> w-full mt-6 bg-primary-500 hover:bg-primary-600 text-white font-semibold py-3 px-4 rounded-full flex items-center justify-center gap-2 transition-all hover:shadow-lg focus:outline-none focus:ring-4 focus:ring-primary-200" <?= empty($cartItems) ? 'aria-disabled="true"' : '' ?>>
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />

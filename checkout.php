@@ -1,21 +1,13 @@
 <?php
 require_once __DIR__ . '/include/header_config.php';
 
-$cartData = isset($_COOKIE['cart']) ? json_decode($_COOKIE['cart'], true) ?? [] : [];
-$hasCart = is_array($cartData) && count($cartData) > 0;
+$cartSnapshot = heritage_cart_snapshot();
+$hasCart = !empty($cartSnapshot['items']);
 $shippingCost = $shippingMethod === 'pickup' ? 0 : $flatRate;
 
 $total = 0.0;
 if ($hasCart) {
-    foreach ($cartData as $item) {
-        $productID = $getdata->sanitizeInput($item['productID'] ?? null);
-        if (!$productID) continue;
-        $qty = filter_var(($item['quantity'] ?? 1), FILTER_VALIDATE_INT, ['options' => ['min_range' => 1]]) ?: 1;
-        $product = $getdata->FetchProductData($productID);
-        if (empty($product) || (int) ($product['status'] ?? 1) !== 1) continue;
-        $unit = (!empty($product['discounted_price']) && (float) $product['discounted_price'] > 0) ? (float) $product['discounted_price'] : (float) ($product['price'] ?? 0);
-        $total += ($unit * $qty);
-    }
+    $total = (float) $cartSnapshot['total'];
 }
 
 $formId = 'checkout_' . bin2hex(random_bytes(8));
@@ -50,7 +42,7 @@ include('components/header.php');
                 </div>
                 <h2 class="mt-5 bebas text-2xl text-secondary-950">Your cart is empty</h2>
                 <p class="mt-2 text-secondary-700">Add products before proceeding to checkout.</p>
-                <a href="<?= SITE_URL ?>/#featured-products"
+                <a href="<?= SITE_URL ?>/shop.php"
                     class="mt-6 inline-flex items-center justify-center rounded-full bg-primary-500 px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-primary-500/20 transition hover:bg-primary-600 focus:outline-none focus:ring-4 focus:ring-primary-200">
                     Browse products
                 </a>

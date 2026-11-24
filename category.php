@@ -300,7 +300,7 @@ include __DIR__ . '/components/page-hero.php';
                         <p class="mt-3 text-sm font-semibold uppercase tracking-wide text-secondary-700">100% plant oil</p>
                         <p class="mt-2 min-h-12 text-sm leading-6 text-secondary-600"><?= htmlspecialchars($subDescription ?: 'Quality plant oil, carefully sourced and prepared for your requirements.', ENT_QUOTES, 'UTF-8') ?></p>
                         <div class="mt-5 grid gap-3 sm:grid-cols-2">
-                            <a href="<?= htmlspecialchars($url, ENT_QUOTES, 'UTF-8') ?>" class="inline-flex min-h-11 items-center justify-center rounded-md bg-primary-700 px-4 py-2 text-sm font-semibold text-white transition hover:bg-secondary-900">Buy now</a>
+                            <button type="button" class="btn-cart inline-flex min-h-11 items-center justify-center rounded-md bg-primary-700 px-4 py-2 text-sm font-semibold text-white transition hover:bg-secondary-900" data-id="<?= htmlspecialchars((string)($sub_cat['id'] ?? ''), ENT_QUOTES, 'UTF-8') ?>">Add to Cart</button>
                             <button type="button" class="oil-enquire inline-flex min-h-11 items-center justify-center rounded-md border border-primary-700 px-4 py-2 text-sm font-semibold text-primary-800 transition hover:bg-primary-50" data-oil-name="<?= htmlspecialchars((string)($sub_cat['title'] ?? ''), ENT_QUOTES, 'UTF-8') ?>" data-oil-image="<?= htmlspecialchars($subCategoryImage, ENT_QUOTES, 'UTF-8') ?>">Enquire now</button>
                         </div>
                     </div>
@@ -357,7 +357,7 @@ include __DIR__ . '/components/page-hero.php';
 
 </section>
 
-<div id="oil-enquiry-modal" class="fixed inset-0 z-[100] hidden items-center justify-center overflow-y-auto bg-secondary-950/65 px-4 py-8 backdrop-blur-sm" role="dialog" aria-modal="true" aria-labelledby="oil-modal-title">
+<div id="oil-enquiry-modal" data-captcha-url="<?= SITE_URL ?>/captcha.php" class="fixed inset-0 z-[100] hidden items-center justify-center overflow-y-auto bg-secondary-950/65 px-4 py-8 backdrop-blur-sm" role="dialog" aria-modal="true" aria-labelledby="oil-modal-title">
     <div class="relative my-auto w-full max-w-3xl rounded-2xl bg-[#f5f0e4] p-4 shadow-2xl sm:p-7">
         <button type="button" class="oil-modal-close absolute right-3 top-3 z-10 grid h-10 w-10 place-items-center rounded-full bg-white text-2xl text-secondary-800 shadow" aria-label="Close enquiry form">&times;</button>
         <div class="mb-5 flex items-center gap-4 pr-12">
@@ -380,7 +380,7 @@ include __DIR__ . '/components/page-hero.php';
     </div>
 </div>
 
-<script src="assets/js/category.js"></script>
+<script src="<?= SITE_URL ?>/assets/js/category.js?v=<?= (int) filemtime(__DIR__ . '/assets/js/category.js') ?>"></script>
 
 <?php $contactHeading = 'Ask about this product'; $contactContext = 'I would like to know more about ' . $category_name . '.'; $contactInnerClass = 'md:px-2'; $contactSectionSpacing = 'py-10'; include __DIR__ . '/components/contact-form.php'; ?>
 <script src="<?= SITE_URL ?>/assets/js/scroll-reveal.js?v=<?= (int) filemtime(__DIR__ . '/assets/js/scroll-reveal.js') ?>" defer></script>

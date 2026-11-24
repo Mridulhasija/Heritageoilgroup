@@ -32,8 +32,10 @@
             currentObserver.unobserve(entry.target);
         });
     }, {
-        threshold: 0.08,
-        rootMargin: '0px 0px -5% 0px'
+        // Large sections can be taller than the viewport, so a percentage
+        // threshold may never be reached. Reveal as soon as any part enters.
+        threshold: 0,
+        rootMargin: '0px'
     });
 
     sections.forEach((section) => observer.observe(section));
